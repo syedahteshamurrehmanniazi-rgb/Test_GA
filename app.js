@@ -62,32 +62,5 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-        document.addEventListener("DOMContentLoaded", function () {
-
-    const form = document.getElementById("emailForm");
-    const successMsg = document.getElementById("successMsg");
-
-    if (form) {
-        form.addEventListener("submit", function (e) {
-            e.preventDefault(); // prevents page reload
-
-            const email = document.getElementById("emailInput").value;
-
-            // Show success message
-            successMsg.style.display = "block";
-
-            // Optional: clear input
-            form.reset();
-
-            // Track in GA4
-            if (typeof gtag === "function") {
-                gtag('event', 'email_submit', {
-                    event_category: 'lead',
-                    event_label: email
-                });
-            }
-
-            console.log("Email captured:", email);
-        });
-    }
+       
 });
