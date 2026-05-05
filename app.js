@@ -49,18 +49,4 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-    document.addEventListener("DOMContentLoaded", function () {
-    const insta = document.getElementById("instaLink");
-
-    if (insta) {
-        insta.addEventListener("click", function () {
-            if (typeof gtag === "function") {
-                gtag('event', 'instagram_click', {
-                    event_category: 'social',
-                    event_label: 'instagram link'
-                });
-            }
-        });
-    }
-       
 });
