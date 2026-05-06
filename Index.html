@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <title>Travel Demo Site - GA4 Practice</title>
+
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5H8HXKTG');</script>
+<!-- End Google Tag Manager -->
+
+  <style>
+    body { font-family: Arial; margin: 0; padding: 0; }
+    header { background: #0b3d91; color: white; padding: 20px; text-align: center; }
+    section { padding: 30px; }
+    .btn {
+      padding: 12px 20px;
+      margin: 10px;
+      background: #ff6a00;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover { opacity: 0.8; }
+    footer { margin-top: 50px; padding: 20px; background: #f1f1f1; }
+    input { padding: 10px; width: 250px; }
+  </style>
+
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5H8HXKTG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header>
+  <h1>Travel Demo Website (GA4 Practice)</h1>
+</header>
+
+<!-- ================= HERO SECTION ================= -->
+<section>
+
+  <h2>Explore Destinations</h2>
+
+  <!-- TOUR BUTTONS -->
+  <button class="btn tour-btn" data-destination="dubai">
+    Dubai Tour
+  </button>
+
+  <button class="btn tour-btn" data-destination="abu-dhabi">
+    Abu Dhabi Tour
+  </button>
+
+</section>
+
+<!-- ================= INFO SECTION ================= -->
+<section>
+
+  <h2>Why Book With Us?</h2>
+
+  <button class="btn info-btn" data-info="pricing">
+    View Pricing
+  </button>
+
+  <button class="btn info-btn" data-info="offers">
+    Special Offers
+  </button>
+
+</section>
+
+<!-- ================= CONTACT SECTION ================= -->
+<section>
+
+  <h2>Contact Us</h2>
+
+  <button class="btn contact-btn" data-contact="whatsapp">
+    WhatsApp Us
+  </button>
+
+  <button class="btn contact-btn" data-contact="email">
+    Email Us
+  </button>
+
+</section>
+
+<!-- ================= LEAD FORM ================= -->
+<section>
+
+  <h2>Get a Call Back</h2>
+
+  <form id="leadForm">
+    <input type="email" id="email" placeholder="Enter email" required>
+    <button class="btn" type="submit">Submit</button>
+  </form>
+
+  <p id="msg" style="display:none; color:green;">
+    Thank you! We will contact you soon.
+  </p>
+
+</section>
+
+<!-- ================= SOCIAL ================= -->
+<footer>
+
+  <p>Follow us</p>
+
+  <a href="https://instagram.com" target="_blank" id="instaLink">
+    Instagram
+  </a>
+
+</footer>
+
+<!-- ================= JS TRACKING ================= -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // ================= TOUR CLICKS =================
+  document.querySelectorAll(".tour-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+
+      const destination = this.getAttribute("data-destination");
+
+      if (typeof gtag === "function") {
+        gtag("event", "tour_click", {
+          event_category: "engagement",
+          button_text: this.innerText,
+          destination: destination
+        });
+      }
+
+      window.location.href = destination + ".html";
+    });
+  });
+
+  // ================= INFO CLICKS =================
+  document.querySelectorAll(".info-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+
+      if (typeof gtag === "function") {
+        gtag("event", "info_click", {
+          button_text: this.innerText,
+          info_type: this.getAttribute("data-info")
+        });
+      }
+    });
+  });
+
+  // ================= CONTACT CLICKS =================
+  document.querySelectorAll(".contact-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+
+      if (typeof gtag === "function") {
+        gtag("event", "contact_click", {
+          contact_method: this.getAttribute("data-contact"),
+          button_text: this.innerText
+        });
+      }
+    });
+  });
+
+  // ================= FORM SUBMIT =================
+  document.getElementById("leadForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+
+    document.getElementById("msg").style.display = "block";
+
+    if (typeof gtag === "function") {
+      gtag("event", "generate_lead", {
+        email_entered: email,
+        form_name: "callback_form"
+      });
+    }
+
+    this.reset();
+  });
+
+  // ================= INSTAGRAM CLICK =================
+  document.getElementById("instaLink").addEventListener("click", function () {
+
+    if (typeof gtag === "function") {
+      gtag("event", "social_click", {
+        platform: "instagram"
+      });
+    }
+  });
+
+});
+</script>
+
+</body>
+</html>
