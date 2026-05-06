@@ -1,54 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  <title>Travel Funnel Demo (GA4 Practice)</title>
 
-  <title>Travel Demo Site - GA4 Practice</title>
-
- <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9SCFLF4L28"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-9SCFLF4L28');
-</script>
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-XXXXXXX');
+  </script>
+  <!-- End GTM -->
 
   <style>
-    body { font-family: Arial; margin: 0; padding: 0; }
-    header { background: #0b3d91; color: white; padding: 20px; text-align: center; }
-    section { padding: 30px; }
-    .btn {
-      padding: 12px 20px;
-      margin: 10px;
-      background: #ff6a00;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .btn:hover { opacity: 0.8; }
-    footer { margin-top: 50px; padding: 20px; background: #f1f1f1; }
-    input { padding: 10px; width: 250px; }
+    body { font-family: Arial; margin:0; padding:0; }
+    header { background:#0b3d91; color:#fff; padding:20px; text-align:center; }
+    section { padding:40px; border-bottom:1px solid #ddd; }
+    .btn { padding:12px 18px; margin:8px; background:#ff6a00; color:#fff; border:none; cursor:pointer; }
+    .btn:hover { opacity:0.8; }
+    input { padding:10px; width:250px; }
   </style>
-
 </head>
 
 <body>
 
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5H8HXKTG"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+<!-- GTM noscript -->
+<noscript>
+<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
 <header>
-  <h1>Travel Demo Website (GA4 Practice)</h1>
+  <h1>Travel Demo Funnel (GA4 + GTM)</h1>
 </header>
 
-<!-- ================= HERO SECTION ================= -->
-<section>
-
+<!-- HERO -->
+<section id="hero">
   <h2>Explore Destinations</h2>
 
-  <!-- TOUR BUTTONS -->
   <button class="btn tour-btn" data-destination="dubai">
     Dubai Tour
   </button>
@@ -59,39 +50,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </section>
 
-<!-- ================= INFO SECTION ================= -->
-<section>
+<!-- INFO -->
+<section id="info">
+  <h2>Why Choose Us</h2>
 
-  <h2>Why Book With Us?</h2>
-
-  <button class="btn info-btn" data-info="pricing">
+  <button class="btn info-btn" data-type="pricing">
     View Pricing
   </button>
 
-  <button class="btn info-btn" data-info="offers">
+  <button class="btn info-btn" data-type="offers">
     Special Offers
   </button>
 
 </section>
 
-<!-- ================= CONTACT SECTION ================= -->
-<section>
-
+<!-- CONTACT -->
+<section id="contact">
   <h2>Contact Us</h2>
 
-  <button class="btn contact-btn" data-contact="whatsapp">
-    WhatsApp Us
+  <button class="btn contact-btn" data-method="whatsapp">
+    WhatsApp
   </button>
 
-  <button class="btn contact-btn" data-contact="email">
-    Email Us
+  <button class="btn contact-btn" data-method="email">
+    Email
   </button>
 
 </section>
 
-<!-- ================= LEAD FORM ================= -->
-<section>
-
+<!-- LEAD FORM -->
+<section id="lead">
   <h2>Get a Call Back</h2>
 
   <form id="leadForm">
@@ -100,27 +88,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </form>
 
   <p id="msg" style="display:none; color:green;">
-    Thank you! We will contact you soon.
+    Thanks! We will contact you soon.
   </p>
-
 </section>
 
-<!-- ================= SOCIAL ================= -->
-<footer>
-
-  <p>Follow us</p>
+<!-- SOCIAL -->
+<section id="social">
+  <h2>Follow Us</h2>
 
   <a href="https://instagram.com" target="_blank" id="instaLink">
     Instagram
   </a>
-
-</footer>
+</section>
 
 <!-- ================= JS TRACKING ================= -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ================= TOUR CLICKS =================
+  // ===== TOUR CLICK (Dubai / Abu Dhabi) =====
   document.querySelectorAll(".tour-btn").forEach(btn => {
     btn.addEventListener("click", function () {
 
@@ -128,43 +113,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (typeof gtag === "function") {
         gtag("event", "tour_click", {
-          event_category: "engagement",
           button_text: this.innerText,
           destination: destination
         });
       }
 
-      window.location.href = destination + ".html";
+      // smooth scroll instead of page navigation (FIXED)
+      document.getElementById(destination).scrollIntoView({behavior:"smooth"});
     });
   });
 
-  // ================= INFO CLICKS =================
+  // ===== INFO CLICK =====
   document.querySelectorAll(".info-btn").forEach(btn => {
     btn.addEventListener("click", function () {
 
       if (typeof gtag === "function") {
         gtag("event", "info_click", {
           button_text: this.innerText,
-          info_type: this.getAttribute("data-info")
+          info_type: this.getAttribute("data-type")
         });
       }
     });
   });
 
-  // ================= CONTACT CLICKS =================
+  // ===== CONTACT CLICK =====
   document.querySelectorAll(".contact-btn").forEach(btn => {
     btn.addEventListener("click", function () {
 
       if (typeof gtag === "function") {
         gtag("event", "contact_click", {
-          contact_method: this.getAttribute("data-contact"),
+          method: this.getAttribute("data-method"),
           button_text: this.innerText
         });
       }
     });
   });
 
-  // ================= FORM SUBMIT =================
+  // ===== FORM SUBMIT =====
   document.getElementById("leadForm").addEventListener("submit", function(e){
     e.preventDefault();
 
@@ -174,15 +159,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (typeof gtag === "function") {
       gtag("event", "generate_lead", {
-        email_entered: email,
-        form_name: "callback_form"
+        form_name: "callback_form",
+        email_entered: email
       });
     }
 
     this.reset();
   });
 
-  // ================= INSTAGRAM CLICK =================
+  // ===== INSTAGRAM CLICK =====
   document.getElementById("instaLink").addEventListener("click", function () {
 
     if (typeof gtag === "function") {
