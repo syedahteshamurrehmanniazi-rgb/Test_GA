@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Travel Test Site</title>
+
+    <!-- GA4 Tracking -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXX');
+    </script>
+</head>
+
+<body>
+    <h1>Welcome to My Travel Website</h1>
+
+    <button onclick="goToPage('dubai.html')">Dubai Tour</button>
+    <button onclick="goToPage('abu-dhabi.html')">Abu Dhabi Tour</button>
+    <button onclick="goToPage('contact.html')">Contact Us</button>
+    <button id="offerBtn">View Special Offer</button>
+
+    <script src="app.js"></script>
+</body>
+</html>
