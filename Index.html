@@ -1,26 +1,396 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>My Travel Test Site</title>
+<html lang="en">
 
-  <!-- Google Tag Manager -->
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Travel Demo Funnel - GA4 Practice</title>
+
+ <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-K32DPJWL');</script>
 <!-- End Google Tag Manager -->
-    </script>
+
+  <style>
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:#f5f5f5;
+    }
+
+    header{
+      background:#0b3d91;
+      color:white;
+      padding:30px;
+      text-align:center;
+    }
+
+    section{
+      padding:50px 20px;
+      text-align:center;
+      background:white;
+      margin:20px;
+      border-radius:10px;
+    }
+
+    h2{
+      margin-bottom:20px;
+    }
+
+    .btn{
+      padding:12px 22px;
+      border:none;
+      background:#ff6a00;
+      color:white;
+      cursor:pointer;
+      margin:10px;
+      border-radius:5px;
+      font-size:16px;
+    }
+
+    .btn:hover{
+      opacity:0.8;
+    }
+
+    input{
+      padding:12px;
+      width:260px;
+      border:1px solid #ccc;
+      border-radius:5px;
+    }
+
+    #msg{
+      display:none;
+      color:green;
+      margin-top:15px;
+      font-weight:bold;
+    }
+
+    footer{
+      text-align:center;
+      padding:30px;
+      background:#222;
+      color:white;
+    }
+
+    footer a{
+      color:#ff6a00;
+      text-decoration:none;
+      font-size:18px;
+    }
+
+  </style>
+
 </head>
 
 <body>
-    <h1>Welcome to My Travel Website</h1>
 
-    <button onclick="goToPage('dubai.html')">Dubai Tour</button>
-    <button onclick="goToPage('abu-dhabi.html')">Abu Dhabi Tour</button>
-    <button onclick="goToPage('contact.html')">Contact Us</button>
-    <button id="offerBtn">View Special Offer</button>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K32DPJWL"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
-    <script src="app.js"></script>
+
+<!-- ================= HEADER ================= -->
+<header>
+
+  <h1>Travel Demo Funnel Website</h1>
+
+  <p>
+    Practice Google Analytics 4 & Google Tag Manager Events
+  </p>
+
+</header>
+
+
+<!-- ================= HERO SECTION ================= -->
+<section id="hero">
+
+  <h2>Explore Destinations</h2>
+
+  <button class="btn dubai-btn" data-destination="dubai">
+    Dubai Tour
+  </button>
+
+  <button class="btn abudhabi-btn" data-destination="abu-dhabi">
+    Abu Dhabi Tour
+  </button>
+
+  <button class="btn contact-btn" data-destination="contact">
+    Contact Us
+  </button>
+
+</section>
+
+
+<!-- ================= INFO SECTION ================= -->
+<section id="info">
+
+  <h2>Why Book With Us?</h2>
+
+  <p>
+    Best pricing, instant confirmations, and premium support.
+  </p>
+
+  <button class="btn info-btn" data-info="pricing">
+    View Pricing
+  </button>
+
+  <button class="btn info-btn" data-info="offers">
+    Special Offers
+  </button>
+
+</section>
+
+
+<!-- ================= CONTACT SECTION ================= -->
+<section id="contact">
+
+  <h2>Talk To Our Travel Experts</h2>
+
+  <button class="btn whatsapp-btn" data-method="whatsapp">
+    WhatsApp Us
+  </button>
+
+  <button class="btn email-btn" data-method="email">
+    Email Us
+  </button>
+
+</section>
+
+
+<!-- ================= LEAD SECTION ================= -->
+<section id="lead">
+
+  <h2>Get a Call Back</h2>
+
+  <form id="leadForm">
+
+    <input
+      type="email"
+      id="email"
+      placeholder="Enter your email"
+      required
+    >
+
+    <br><br>
+
+    <button class="btn" type="submit">
+      Submit
+    </button>
+
+  </form>
+
+  <p id="msg">
+    Thank you! We will contact you soon.
+  </p>
+
+</section>
+
+
+<!-- ================= SOCIAL SECTION ================= -->
+<footer>
+
+  <h2>Follow Us</h2>
+
+  <a
+    href="https://instagram.com"
+    target="_blank"
+    id="instaLink"
+  >
+    Instagram
+  </a>
+
+</footer>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  // ================= DUBAI BUTTON =================
+  document.querySelector(".dubai-btn").addEventListener("click", function () {
+
+    if (typeof gtag === "function") {
+
+      gtag("event", "tour_click", {
+
+        destination: "dubai",
+
+        button_text: this.innerText
+
+      });
+
+    }
+
+    document.getElementById("info").scrollIntoView({
+      behavior: "smooth"
+    });
+
+  });
+
+
+
+  // ================= ABU DHABI BUTTON =================
+  document.querySelector(".abudhabi-btn").addEventListener("click", function () {
+
+    if (typeof gtag === "function") {
+
+      gtag("event", "tour_click", {
+
+        destination: "abu-dhabi",
+
+        button_text: this.innerText
+
+      });
+
+    }
+
+    document.getElementById("contact").scrollIntoView({
+      behavior: "smooth"
+    });
+
+  });
+
+
+
+  // ================= CONTACT BUTTON =================
+  document.querySelector(".contact-btn").addEventListener("click", function () {
+
+    if (typeof gtag === "function") {
+
+      gtag("event", "contact_click", {
+
+        section: "contact",
+
+        button_text: this.innerText
+
+      });
+
+    }
+
+    document.getElementById("lead").scrollIntoView({
+      behavior: "smooth"
+    });
+
+  });
+
+
+
+  // ================= INFO BUTTONS =================
+  document.querySelectorAll(".info-btn").forEach(btn => {
+
+    btn.addEventListener("click", function () {
+
+      if (typeof gtag === "function") {
+
+        gtag("event", "info_click", {
+
+          info_type: this.getAttribute("data-info"),
+
+          button_text: this.innerText
+
+        });
+
+      }
+
+    });
+
+  });
+
+
+
+  // ================= WHATSAPP BUTTON =================
+  document.querySelector(".whatsapp-btn").addEventListener("click", function () {
+
+    if (typeof gtag === "function") {
+
+      gtag("event", "contact_click", {
+
+        method: "whatsapp"
+
+      });
+
+    }
+
+    alert("WhatsApp feature coming soon!");
+
+  });
+
+
+
+  // ================= EMAIL BUTTON =================
+  document.querySelector(".email-btn").addEventListener("click", function () {
+
+    if (typeof gtag === "function") {
+
+      gtag("event", "contact_click", {
+
+        method: "email"
+
+      });
+
+    }
+
+    alert("Email feature coming soon!");
+
+  });
+
+
+
+  // ================= LEAD FORM =================
+  document.getElementById("leadForm").addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+
+    document.getElementById("msg").style.display = "block";
+
+    if (typeof gtag === "function") {
+
+      gtag("event", "generate_lead", {
+
+        form_name: "callback_form",
+
+        email_entered: email
+
+      });
+
+    }
+
+    this.reset();
+
+  });
+
+
+
+  // ================= INSTAGRAM CLICK =================
+  document.getElementById("instaLink").addEventListener("click", function () {
+
+    if (typeof gtag === "function") {
+
+      gtag("event", "social_click", {
+
+        platform: "instagram"
+
+      });
+
+    }
+
+  });
+
+});
+
+</script>
+
 </body>
 </html>
