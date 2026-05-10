@@ -8,13 +8,19 @@
 
   <title>Lilopilia - Your Travel Plan Destroyer</title>
 
- <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-K32DPJWL');</script>
-<!-- End Google Tag Manager -->
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K32DPJWL');
+  </script>
+  <!-- End Google Tag Manager -->
 
   <style>
 
@@ -92,8 +98,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <body>
 
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K32DPJWL"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript>
+  <iframe
+    src="https://www.googletagmanager.com/ns.html?id=GTM-K32DPJWL"
+    height="0"
+    width="0"
+    style="display:none;visibility:hidden">
+  </iframe>
+</noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 
@@ -194,6 +206,80 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 
+<!-- ================= PRODUCT PAGE ================= -->
+<section id="productPage" style="display:none;">
+
+  <h2>Dubai Desert Safari</h2>
+
+  <p>
+    Experience dune bashing, camel rides, BBQ dinner and live entertainment.
+  </p>
+
+  <h3>Select Package</h3>
+
+  <button class="btn package-btn" data-package="standard">
+    Standard Package - AED 199
+  </button>
+
+  <button class="btn package-btn" data-package="premium">
+    Premium Package - AED 399
+  </button>
+
+  <br><br>
+
+  <button class="btn" id="bookNowBtn">
+    Book Now
+  </button>
+
+</section>
+
+
+<!-- ================= BOOKING SECTION ================= -->
+<section id="bookingSection" style="display:none;">
+
+  <h2>Complete Your Booking</h2>
+
+  <form id="bookingForm">
+
+    <input
+      type="text"
+      id="customerName"
+      placeholder="Enter your name"
+      required
+    >
+
+    <br><br>
+
+    <input
+      type="email"
+      id="customerEmail"
+      placeholder="Enter your email"
+      required
+    >
+
+    <br><br>
+
+    <button class="btn" type="submit">
+      Confirm Booking
+    </button>
+
+  </form>
+
+</section>
+
+
+<!-- ================= THANK YOU SECTION ================= -->
+<section id="thankYouSection" style="display:none;">
+
+  <h2>Booking Confirmed!</h2>
+
+  <p>
+    Thank you for booking with Lilopilia.
+  </p>
+
+</section>
+
+
 <!-- ================= SOCIAL SECTION ================= -->
 <footer>
 
@@ -219,19 +305,18 @@ document.addEventListener("DOMContentLoaded", function () {
   // ================= DUBAI BUTTON =================
   document.querySelector(".dubai-btn").addEventListener("click", function () {
 
-    if (typeof gtag === "function") {
+    // Track Product View
+    dataLayer.push({
+      event: "view_product",
+      destination: "dubai",
+      product_name: "Dubai Desert Safari"
+    });
 
-      gtag("event", "tour_click", {
+    // Show Product Page
+    document.getElementById("productPage").style.display = "block";
 
-        destination: "dubai",
-
-        button_text: this.innerText
-
-      });
-
-    }
-
-    document.getElementById("info").scrollIntoView({
+    // Scroll to Product Page
+    document.getElementById("productPage").scrollIntoView({
       behavior: "smooth"
     });
 
@@ -242,17 +327,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // ================= ABU DHABI BUTTON =================
   document.querySelector(".abudhabi-btn").addEventListener("click", function () {
 
-    if (typeof gtag === "function") {
-
-      gtag("event", "tour_click", {
-
-        destination: "abu-dhabi",
-
-        button_text: this.innerText
-
-      });
-
-    }
+    dataLayer.push({
+      event: "tour_click",
+      destination: "abu-dhabi",
+      button_text: this.innerText
+    });
 
     document.getElementById("contact").scrollIntoView({
       behavior: "smooth"
@@ -265,17 +344,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // ================= CONTACT BUTTON =================
   document.querySelector(".contact-btn").addEventListener("click", function () {
 
-    if (typeof gtag === "function") {
-
-      gtag("event", "contact_click", {
-
-        section: "contact",
-
-        button_text: this.innerText
-
-      });
-
-    }
+    dataLayer.push({
+      event: "contact_click",
+      section: "contact",
+      button_text: this.innerText
+    });
 
     document.getElementById("lead").scrollIntoView({
       behavior: "smooth"
@@ -290,17 +363,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     btn.addEventListener("click", function () {
 
-      if (typeof gtag === "function") {
-
-        gtag("event", "info_click", {
-
-          info_type: this.getAttribute("data-info"),
-
-          button_text: this.innerText
-
-        });
-
-      }
+      dataLayer.push({
+        event: "info_click",
+        info_type: this.getAttribute("data-info"),
+        button_text: this.innerText
+      });
 
     });
 
@@ -311,15 +378,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // ================= WHATSAPP BUTTON =================
   document.querySelector(".whatsapp-btn").addEventListener("click", function () {
 
-    if (typeof gtag === "function") {
-
-      gtag("event", "contact_click", {
-
-        method: "whatsapp"
-
-      });
-
-    }
+    dataLayer.push({
+      event: "contact_click",
+      method: "whatsapp"
+    });
 
     alert("WhatsApp feature coming soon!");
 
@@ -330,15 +392,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // ================= EMAIL BUTTON =================
   document.querySelector(".email-btn").addEventListener("click", function () {
 
-    if (typeof gtag === "function") {
-
-      gtag("event", "contact_click", {
-
-        method: "email"
-
-      });
-
-    }
+    dataLayer.push({
+      event: "contact_click",
+      method: "email"
+    });
 
     alert("Email feature coming soon!");
 
@@ -355,17 +412,94 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("msg").style.display = "block";
 
-    if (typeof gtag === "function") {
+    dataLayer.push({
+      event: "generate_lead",
+      form_name: "callback_form",
+      email_entered: email
+    });
 
-      gtag("event", "generate_lead", {
+    this.reset();
 
-        form_name: "callback_form",
+  });
 
-        email_entered: email
 
+
+  // ================= PACKAGE SELECTION =================
+  let selectedPackage = "";
+
+  document.querySelectorAll(".package-btn").forEach(btn => {
+
+    btn.addEventListener("click", function () {
+
+      selectedPackage = this.getAttribute("data-package");
+
+      dataLayer.push({
+        event: "select_package",
+        package_name: selectedPackage
       });
 
+      alert("Selected Package: " + selectedPackage);
+
+    });
+
+  });
+
+
+
+  // ================= BOOK NOW =================
+  document.getElementById("bookNowBtn").addEventListener("click", function () {
+
+    if(selectedPackage === ""){
+
+      alert("Please select a package first.");
+
+      return;
+
     }
+
+    dataLayer.push({
+      event: "begin_checkout",
+      package_name: selectedPackage
+    });
+
+    document.getElementById("bookingSection").style.display = "block";
+
+    document.getElementById("bookingSection").scrollIntoView({
+      behavior: "smooth"
+    });
+
+  });
+
+
+
+  // ================= BOOKING FORM =================
+  document.getElementById("bookingForm").addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    const customerName = document.getElementById("customerName").value;
+
+    const customerEmail = document.getElementById("customerEmail").value;
+
+    // PURCHASE / CONVERSION EVENT
+    dataLayer.push({
+      event: "purchase",
+      transaction_id: "TXN_" + Date.now(),
+      value: selectedPackage === "premium" ? 399 : 199,
+      currency: "AED",
+      package_name: selectedPackage,
+      customer_name: customerName,
+      customer_email: customerEmail
+    });
+
+    // Show Thank You Page
+    document.getElementById("thankYouSection").style.display = "block";
+
+    document.getElementById("thankYouSection").scrollIntoView({
+      behavior: "smooth"
+    });
+
+    alert("Booking Successful!");
 
     this.reset();
 
@@ -376,15 +510,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // ================= INSTAGRAM CLICK =================
   document.getElementById("instaLink").addEventListener("click", function () {
 
-    if (typeof gtag === "function") {
-
-      gtag("event", "social_click", {
-
-        platform: "instagram"
-
-      });
-
-    }
+    dataLayer.push({
+      event: "social_click",
+      platform: "instagram"
+    });
 
   });
 
